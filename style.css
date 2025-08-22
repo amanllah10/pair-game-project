@@ -1,0 +1,115 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.memorycard-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.memorycard-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 25px;
+    border: 1px solid black;
+    padding: 20px;
+    background-color: aquamarine;
+}
+
+button {
+    width: 100px;
+    height: 100px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    opacity: 1;
+    background: url(js.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+}
+
+button.active::before {
+    content: 'clicked';
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.display-none {
+    display: none;
+}
+
+h1 {
+    font-size: 50px;
+    margin: 20px;
+}
+
+.move {
+    position: absolute;
+    top: 0px;
+    transition: all 2s ease;
+}
+
+.new-img {
+    margin: 10px;
+}
+
+@media(max-width:550px) {
+    img {
+        width: 70px;
+        height: 70px;
+    }
+
+    button {
+        width: 70px;
+        height: 70px;
+    }
+    button::before {
+    content: '';
+    position: absolute;
+    opacity: 1;
+    background: url(js.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
+}
+}
+@media(max-width:410px) {
+    img {
+        width: 50px;
+        height: 50px;
+    }
+
+    button {
+        width: 50px;
+        height: 50px;
+    }
+    button::before {
+    content: '';
+    position: absolute;
+    opacity: 1;
+    background: url(js.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+}
+}
