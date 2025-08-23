@@ -30,6 +30,8 @@ imgs.forEach((imgs) => {
 let currentActiveButton = null
 let lastActiveButton = null
 let clickCount = 0
+let winClick = 0
+let lossClick = 0
 let allButtons = document.querySelectorAll('.button')
 
 allButtons.forEach((btns) => {
@@ -40,7 +42,6 @@ allButtons.forEach((btns) => {
         btns.classList.toggle('active')
         if (btns.classList.contains('active')) {
             clickCount++
-
         }
         if (lastActiveButton) {
             console.log('LastActiveButton is', lastActiveButton.innerHTML)
@@ -53,48 +54,52 @@ allButtons.forEach((btns) => {
                 disable.style.pointerEvents = 'auto'
             })
         }
-        if (clickCount === 2 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 4 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 6 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 8 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 10 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 12 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 14 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 16 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 18 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 20 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 22 && lastActiveButton.innerHTML === currentActiveButton.innerHTML ||
-            clickCount === 24 && lastActiveButton.innerHTML === currentActiveButton.innerHTML
-        ) {
-            result.innerHTML = 'Match'
-            newImg.src = './happy.jpg'
+            if (clickCount % 2 === 0) {
+                if (lastActiveButton.innerHTML === currentActiveButton.innerHTML) {
 
+                    result.innerHTML = 'Match'
+                    newImg.src = './happy.jpg'
+                    winClick++
+                    console.log(winClick)
+                    if (winClick === 6) {
+                        result.innerHTML = 'You Match all Pairs'
+                        setTimeout(() => {
+                            location.reload()
+                        }, 2000)
+                    }
 
-            setTimeout(() => {
-                result.innerHTML = ''
-                newImg.src = './think.png'
-            }, 2000);
-        } else if (clickCount === 2 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 4 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 6 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 8 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 10 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 12 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 14 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 16 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 18 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 20 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 22 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML ||
-            clickCount === 24 && lastActiveButton.innerHTML !== currentActiveButton.innerHTML
-        ) {
-            result.innerHTML = 'No Match'
-            newImg.src = './sad.jpeg'
-            setTimeout(() => {
-                currentActiveButton.classList.toggle('active')
-                lastActiveButton.classList.toggle('active')
-                result.innerHTML = ''
-                newImg.src = './think.png'
-            }, 2000)
+                    setTimeout(() => {
+                        result.innerHTML = ''
+                        newImg.src = './think.png'
+                    }, 2000);
+                }
+
+            }
+        if (clickCount % 2 === 0) {
+            if (currentActiveButton.innerHTML !== lastActiveButton.innerHTML) {
+
+                result.innerHTML = 'No Match'
+                newImg.src = './sad.jpeg'
+                lossClick++
+                console.log(lossClick)
+                if (lossClick === 5) {
+                    result.innerHTML = 'You have lost all chances'
+
+                    allButtons.forEach((disable) => {
+                        disable.style.pointerEvents = 'none'
+                    })
+                    setTimeout(() => {
+                        location.reload()
+                    }, 5000)
+                }
+
+                setTimeout(() => {
+                    currentActiveButton.classList.toggle('active')
+                    lastActiveButton.classList.toggle('active')
+                    result.innerHTML = ''
+                    newImg.src = './think.png'
+                }, 2000)
+            }
         }
 
         if (currentActiveButton.innerHTML === lastActiveButton) {
