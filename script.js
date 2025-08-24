@@ -93,6 +93,9 @@ allButtons.forEach((btns) => {
                 if (lossClick >= 1) {
                     lastActiveButton.disabled = true
                     currentActiveButton.disabled = true
+                    allButtons.forEach((disable) => {
+                        disable.style.pointerEvents = 'none'
+                    })
                     setTimeout(() => {
                         lastActiveButton.disabled = false
                         currentActiveButton.disabled = false
